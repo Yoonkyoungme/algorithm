@@ -1,32 +1,26 @@
 function solution(n, computers) {
     let result = 0;
-    let dist = new Array(n).fill(false);
+    let visited = new Array(n).fill(false);
     
-    function dfs(now){
-        dist[now] = true;
+    /**
+    방문하지 않은 now node를 탐색한다.
+    탐색할 node는 이어져있고, 방문한적 없는 노드이다.
+    */
+    function searchNextNode(now){
+        visited[now] = true;
         for (let next = 0 ; next < n; next++){
-            if (computers[now][next] === 1 && !dist[next]){
-
-                dfs(next);               
+            if (computers[now][next] === 1 && !visited[next]){
+                searchNextNode(next);               
             }    
         }
-        
     }
     
     for (let i = 0; i < n; i++){
-        if (!dist[i]){
-            dist[i] = true;
-            dfs(i);
+        if (!visited[i]){
+            visited[i] = true;
+            searchNextNode(i);
             result += 1;        
         }  
     }
     return result;
 }
-
-/*
-	[1, 1, 0], 
-    [1, 1, 0], 
-    [0, 0, 1]
-    
-    0, 1 -> dfs(i) -> 1, 2
-*/
