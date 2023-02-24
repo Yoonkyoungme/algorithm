@@ -19,8 +19,8 @@ for (let i = 0; i < N; i++) {
   }
 }
 
-for (let i = 1; i < M; i++) {
-  if (!findParent(plan[i - 1] - 1, plan[i] - 1)) {
+for (let i = 0; i < M - 1; i++) {
+  if (union(plan[i] - 1, plan[i + 1] - 1)) {
     console.log("NO");
     return;
   }
@@ -37,13 +37,8 @@ function union(x, y) {
   const n1 = getParent(x);
   const n2 = getParent(y);
 
+  if (n1 === n2) return false;
+
   n1 < n2 ? (parents[n2] = n1) : (parents[n1] = n2);
-}
-
-function findParent(x, y) {
-  const n1 = getParent(x);
-  const n2 = getParent(y);
-
-  if (n1 === n2) return true;
-  else return false;
+  return true;
 }
