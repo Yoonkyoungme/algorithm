@@ -1,11 +1,9 @@
 function solution(food) {
-  let front = "";
+  let result = "";
 
   for (let i = 1; i < food.length; i++) {
-    for (let j = 0; j < parseInt(food[i] / 2); j++) front += i;
+    result += String(i).repeat(parseInt(food[i] / 2));
   }
 
-  let end = front.split("").reverse().join("");
-
-  return `${front}0${end}`;
+  return `${result}0${[...result].reverse().join("")}`;
 }
