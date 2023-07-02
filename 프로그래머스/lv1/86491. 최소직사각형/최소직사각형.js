@@ -1,17 +1,12 @@
 function solution(sizes) {
-  let w = [];
-  let h = [];
+  const [w, h] = sizes.reduce(
+    ([widths, heights], [x, y]) => {
+      widths.push(Math.max(x, y));
+      heights.push(Math.min(x, y));
+      return [widths, heights];
+    },
+    [[], []]
+  );
 
-  for (let i = 0; i < sizes.length; i++) {
-    const [x, y] = sizes[i];
-    if (x >= y) {
-      w.push(x);
-      h.push(y);
-    } else {
-      w.push(y);
-      h.push(x);
-    }
-  }
-  console.log(w, h);
   return Math.max(...w) * Math.max(...h);
 }
