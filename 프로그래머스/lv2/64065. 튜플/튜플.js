@@ -5,10 +5,9 @@ function solution(s) {
     tuples.forEach((data) => {
         const elements = data.split(',');
         elements.forEach((element) => {
-            const num = parseInt(element);
-            if (!result.includes(num)) result.push(num);
+            result.push(parseInt(element));
         });
     });
     
-    return result;
+    return [...new Set(result)];
 }
