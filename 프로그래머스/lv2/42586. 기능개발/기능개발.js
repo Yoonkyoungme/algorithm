@@ -1,20 +1,17 @@
 function solution(progresses, speeds) {
-  const deploy = [];
   const result = [];
+  let previousMaxDeploy = 0;
 
-  progresses.forEach((progress, index) => {
-    deploy.push(Math.ceil((100 - progress) / speeds[index]));
-  });
+  for (let i = 0; i < progresses.length; i++) {
+    const deploy = Math.ceil((100 - progresses[i]) / speeds[i]);
 
-  let temp = [deploy[0], 1];
-  for (let i = 1; i < deploy.length; i++) {
-    if (temp[0] >= deploy[i]) {
-      temp[1]++;
+    if (deploy > previousMaxDeploy) {
+      result.push(1);
+      previousMaxDeploy = deploy;
     } else {
-      result.push(temp[1]);
-      temp = [deploy[i], 1];
+      result[result.length - 1]++;
     }
   }
-  result.push(temp[1]);
+
   return result;
 }
