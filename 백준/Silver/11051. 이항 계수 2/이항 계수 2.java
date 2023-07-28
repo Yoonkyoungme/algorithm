@@ -19,15 +19,10 @@ public class Main {
 	}
 
 	static int BC(int n, int k) {
-
-		// 이미 풀었던 sub 문제일 경우 값을 재활용
-		if (dp[n][k] > 0) {
+		if (dp[n][k] > 0)
 			return dp[n][k];
-		}
-
-		if (k == 0 || n == k) {
+		if (k == 0 || n == k)
 			return dp[n][k] = 1;
-		}
 
 		return dp[n][k] = (BC(n - 1, k - 1) + BC(n - 1, k)) % NUMBER;
 	}
