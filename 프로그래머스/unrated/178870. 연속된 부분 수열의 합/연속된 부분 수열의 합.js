@@ -10,7 +10,7 @@ function solution(sequence, k) {
       sum -= sequence[start++];
     } else {
       result.push([start, end]);
-      sum += sequence[++end];
+      sum += sequence[++end] - sequence[start++];
     }
   }
   return result.sort((a, b) => a[1] - a[0] - (b[1] - b[0]))[0];
