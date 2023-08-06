@@ -1,28 +1,27 @@
 function solution(s) {
+  const obj = {
+    "}": "{",
+    "]": "[",
+    ")": "(",
+  };
+
   let result = 0;
-  let stack = [];
-    
-  if (s.length % 2 === 1) return 0;
 
-  for (let i = 0; i < s.length; i++) {
-    let isFalse = true;
-    arr = s.slice(i) + s.slice(0, i);
-
-    for (let ch of arr) {
-      if (ch === "(" || ch === "[" || ch === "{") {
+  const isCorrectBracket = (rotation) => {
+    let stack = [];
+    for (let ch of rotation) {
+      if ("([{".includes(ch)) {
         stack.push(ch);
-      } else {
-        let comp = stack.pop();
-        if (comp === "(" && ch == ")") continue;
-        else if (comp === "[" && ch == "]") continue;
-        else if (comp === "{" && ch == "}") continue;
-        else {
-          isFalse = false;
-          break;
-        }
+      } else if (obj[ch] !== stack.pop()) {
+        return false;
       }
     }
-    if (isFalse === true) result++;
+    return stack.length ? false : true;
+  };
+
+  for (let i = 0; i < s.length; i++) {
+    let rotation = s.slice(i) + s.slice(0, i);
+    result += isCorrectBracket(rotation) ? 1 : 0;
   }
   return result;
 }
