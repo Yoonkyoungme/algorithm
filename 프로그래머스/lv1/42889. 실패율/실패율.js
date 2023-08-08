@@ -1,13 +1,11 @@
 function solution(N, stages) {
-  const map = new Map();
-  let stagesLength = stages.length;
+  let result = [];
 
   for (let i = 1; i <= N; i++) {
-    const count = stages.filter((stage) => stage === i).length;
-    map.set(i, count / stagesLength);
-    stagesLength -= count;
+    let over = stages.filter((stage) => stage >= i).length;
+    let count = stages.filter((stage) => stage === i).length;
+    result.push([i, count / over]);
   }
-
-  const result = new Map([...map].sort((a, b) => b[1] - a[1]));
-  return [...result.keys()];
+  result.sort((a, b) => b[1] - a[1]);
+  return result.map((failure) => failure[0]);
 }
