@@ -1,25 +1,15 @@
 /**
  * @param {string} s
- * @returns {number} the length of the last word in the string
+ * @return {number} - the length of the last word in the string
  */
-
 const lengthOfLastWord = function(s) {
-    const words = [];
-    let word = "";
-    
-    for (let i = 0; i < s.length; i++) {
-        if (s[i] !== " ") {
-            word += s[i];
-        } else if (s[i] === " " && word !== "") {
-            words.push(word);
-            word = "";
-        }
-    }
+    // Step 1: Trim any trailing spaces from the string
+    s = s.trim();
 
-    if (word !== "") {
-        words.push(word);
-    }
-    
-    const lastWord = words.at(-1);
-    return lastWord.length;
+    // Step 2: Find the last space in the trimmed string
+    const lastSpaceIndex = s.lastIndexOf(' ');
+    console.log(s, s.length, lastSpaceIndex)
+
+    // Step 3: The last word is the substring after the last space, so calculate its length
+    return s.length - lastSpaceIndex - 1;
 };
