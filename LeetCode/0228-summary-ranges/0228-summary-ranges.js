@@ -9,12 +9,12 @@ const summaryRanges = function(nums) {
     for (let i = 0; i < nums.length; i++) {
         const num = nums[i];
 
-        if (start === null) {
+        if (startNum === null) {
             startNum = num
         }
 
         if (i === nums.length - 1 || num + 1 !== nums[i + 1]) {
-            if (start === num) {
+            if (startNum === num) {
                 results.push(`${startNum}`);
             } else {
                 results.push(`${startNum}->${num}`);
