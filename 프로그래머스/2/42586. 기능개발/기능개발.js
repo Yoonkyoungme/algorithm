@@ -1,21 +1,20 @@
 function solution(progresses, speeds) {
-    const result = [];
-    
+    const results = [];
     const daysLeft = progresses.map((progress, index) => Math.ceil((100 - progress) / speeds[index]));
-    
+
     let count = 0;
     let maxDay = daysLeft[0];
     
-    for (let i = 0; i < progresses.length; i++) {
-        if (daysLeft[i] <= maxDay) {
+    for (const left of daysLeft) {
+        if (left <= maxDay) {
             count++;
         } else {
-            result.push(count);
+            results.push(count);
             count = 1;
-            maxDay = daysLeft[i];
+            maxDay = left;
         }
     }
     
-    result.push(count);
-    return result;
+    results.push(count);
+    return results;
 }
